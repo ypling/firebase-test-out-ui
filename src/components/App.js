@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import SignIn from "./Signin";
 import SignUp from "./Signup";
-import {onAuthStateChanged, signOut, sendEmailVerification} from 'firebase/auth'
+import {onAuthStateChanged, signOut } from 'firebase/auth'
 import {firebaseAuth} from "../utils/authHelper";
 
 const App = () => {
@@ -10,6 +10,9 @@ const App = () => {
         onAuthStateChanged(firebaseAuth, (user) => {
             if (user) {
                 setPage("LOGGED_IN")
+                user.getIdToken().then((token) => {
+                    console.log(token)
+                })
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/auth.user
                 const uid = user.uid;
