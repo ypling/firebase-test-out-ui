@@ -3,6 +3,7 @@ import SignIn from "./Signin";
 import SignUp from "./Signup";
 import {onAuthStateChanged, signOut } from 'firebase/auth'
 import {firebaseAuth} from "../utils/authHelper";
+import Dashboard from "./Dashboard";
 
 const App = () => {
     const [page, setPage] = useState()
@@ -25,12 +26,9 @@ const App = () => {
         });
     },[])
 
-    const handleSignOut = () => {
-        signOut(firebaseAuth)
-    }
     return (
         <>
-            {page === 'LOGGED_IN' && <div>User Logged In <a href="" onClick={handleSignOut}>Logout</a></div>}
+            {page === 'LOGGED_IN' && <Dashboard />}
             {page === 'SIGN_IN' && <SignIn goToSignUp={() => {
                 setPage('SIGN_UP')
             }}/>}

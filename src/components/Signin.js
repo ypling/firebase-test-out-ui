@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {signInWithEmailAndPassword} from 'firebase/auth'
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import {firebaseAuth} from "../utils/authHelper";
 
 function Copyright(props) {
@@ -36,7 +36,8 @@ export default function SignIn({goToSignUp}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        signInWithEmailAndPassword(firebaseAuth, data.get('email'), data.get('password'))
+        const auth = getAuth()
+        signInWithEmailAndPassword(auth, data.get('email'), data.get('password'))
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;

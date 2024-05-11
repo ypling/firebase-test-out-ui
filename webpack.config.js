@@ -26,4 +26,12 @@ module.exports = {
             template: path.join(__dirname, "src", "index.html"),
         }),
     ],
+    devServer: {
+        proxy: [
+            {
+                context: ['/graphql'],
+                target: 'http://localhost:30080',
+            },
+        ]
+    }
 }
